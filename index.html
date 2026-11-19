@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Weer Viz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <canvas id="sky"></canvas>
+
+  <header class="topbar">
+    <div class="brand">weer<span>viz</span></div>
+    <form id="search" autocomplete="off">
+      <input id="q" type="search" placeholder="Zoek een stad…" />
+      <ul id="suggest"></ul>
+    </form>
+    <button id="locate" title="Mijn locatie">◎</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="place" id="place">—</div>
+      <div class="now">
+        <div class="temp" id="temp">--°</div>
+        <div class="meta">
+          <div class="cond" id="cond">Laden…</div>
+          <div class="feels" id="feels"></div>
+          <div class="minmax" id="minmax"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tiles">
+      <div class="tile">
+        <h3>Wind</h3>
+        <svg id="compass" viewBox="0 0 120 120"></svg>
+        <div class="big" id="wind">--</div>
+      </div>
+      <div class="tile">
+        <h3>Luchtvochtigheid</h3>
+        <svg class="ring" id="humRing" viewBox="0 0 120 120"></svg>
+        <div class="big" id="hum">--</div>
+      </div>
+      <div class="tile">
+        <h3>UV-index</h3>
+        <svg class="ring" id="uvRing" viewBox="0 0 120 120"></svg>
+        <div class="big" id="uv">--</div>
+      </div>
+      <div class="tile">
+        <h3>Luchtkwaliteit</h3>
+        <svg class="ring" id="aqiRing" viewBox="0 0 120 120"></svg>
+        <div class="big" id="aqi">--</div>
+      </div>
+      <div class="tile">
+        <h3>Luchtdruk</h3>
+        <div class="huge" id="pres">--</div>
+        <div class="sub">hPa</div>
+      </div>
+      <div class="tile">
+        <h3>Zon</h3>
+        <svg id="sunArc" viewBox="0 0 200 110"></svg>
+        <div class="sub" id="sunTimes"></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-head">
+        <h2>Komende 48 uur</h2>
+        <div class="legend"><span class="l-temp">temperatuur</span><span class="l-feel">gevoel</span><span class="l-rain">neerslag</span></div>
+      </div>
+      <div class="chart-wrap"><canvas id="hourly"></canvas><div id="tip"></div></div>
+    </section>
+
+    <section class="card">
+      <h2>7 dagen</h2>
+      <div id="days"></div>
+    </section>
+
+    <section class="card">
+      <div class="card-head">
+        <h2>Neerslagradar</h2>
+        <div class="radar-ctl"><button id="play">❚❚</button><span id="radarTime"></span></div>
+      </div>
+      <div id="map"></div>
+    </section>
+
+    <section class="card">
+      <h2>Temperatuur heatmap — 7 dagen × 24 uur</h2>
+      <canvas id="heat"></canvas>
+    </section>
+  </main>
+
+  <footer>
+    Data: <a href="https://open-meteo.com" target="_blank">Open-Meteo</a> (forecast, luchtkwaliteit, geocoding) ·
+    <a href="https://www.rainviewer.com/api.html" target="_blank">RainViewer</a> (radar) ·
+    kaart © <a href="https://www.openstreetmap.org/copyright" target="_blank">OSM</a> / CARTO
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="app.js" type="module"></script>
+</body>
+</html>
